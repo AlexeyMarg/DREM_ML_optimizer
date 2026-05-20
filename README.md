@@ -66,6 +66,7 @@ $$
 Multiply Equation (2) by the adjugate matrix $ \text{adj}\{\mathbf{M}(t)\} $ to obtain $ q $ independent scalar linear regressions:
 
 #### **Step 3. Mixing**
+
 $$
 Y_i(t) = \Delta(t) w_i, \quad i = 1, \dots, q, \tag{3}
 $$
@@ -111,22 +112,27 @@ $$
 \mathbf{Y}_e^j = \mathbf{X}^{b_j} \mathbf{w}, \tag{4}
 $$
 where $ \mathbf{w} $ is the weight vector. Multiply Equation (4) by the adjugate matrix $ \mathbf{X}^{*j} = \text{adj}\{\mathbf{X}^{b_j}\} $:
-$
+
+$$
 \mathbf{Y}^j = \text{diag}\{\Delta^j\} \mathbf{w},
-$
+$$
+
 where:
-$
+
+$$
 \mathbf{Y}^j = \mathbf{X}^{*j} \mathbf{Y}_e^j, \quad \mathbf{X}^{*j} \mathbf{X}^{b_j} = \begin{bmatrix}
 \Delta & 0 & \cdots & 0 \\
 0 & \ddots & \cdots & 0 \\
 0 & 0 & \cdots & \Delta
 \end{bmatrix}, \quad \Delta^j = \det(\mathbf{X}^{b_j}).
-$
+$$
 
 To reduce computational complexity, instead of explicitly computing the adjugate matrix, we use Cramer's rule:
-$
+
+$$
 Y_i^j = \det(\mathbf{X}^{(b_j, i)}),
-$
+$$
+
 where $ \mathbf{X}^{(b_j, i)} $ is the matrix $ \mathbf{X}^{b_j} $ with the $ i $-th column replaced by the vector $ \mathbf{Y}_e^j $ [9].
 
 After the transformations, the multi-parameter regression problem with $ p+1 $ unknowns reduces to solving $ p+1 $ scalar regression problems:
@@ -137,14 +143,16 @@ $$
 2.3 **Weight Update**
 
 To determine the weights, use gradient descent:
+
 $$
 w_i := w_i - \alpha \Delta^j (\Delta^j w_i - Y_i^j). \tag{5}
 $$
 
 To improve stability, the following algorithm can be used instead:
-$
+
+$$
 w_i := w_i - \alpha \Delta^j \frac{\Delta^j w_i - Y_i^j}{1 + \alpha (\Delta^j)^2}.
-$
+$$
 
 #### **3. Termination Criterion**
 
